@@ -1,9 +1,11 @@
+
 module.exports = {
     publicPath: '/', //输出目录
     outputDir: "dist", // 打包生成的文件存放地址
     assetsDir: '', //放置生成的静态资源包
     indexPath: 'index.html', // 生成的index.html 路径
     filenameHashing: "true", //静态资源的页面缓存
+    transpileDependencies:['vux'],
     pages: {
         index: {
             entry: 'src/main.js', //page 入口
@@ -18,6 +20,17 @@ module.exports = {
         // 输出文件名会被推导为 `subpage.html`
         // subpage: 'src/subpage/main.js'
     },
+    chainWebpack:config=>{ //合并到webpack配置文件中
+        
+    },
+    configureWebpack:config=>{
+        // vux2必须配合vux-loader使用
+        require('vux-loader').merge(config, {
+            options: {},
+            plugins:[{name:'vux-ui'},{ name:'duplicate-style'}],
+            resolve:{extensions: ['.js', '.vue', '.json']}
+        })
+    },
     lintOnSave: 'error',// 是否在保存的时候检查(true,false) error 错误直接显示在浏览器（强制导致编译失败） 
     productionSourceMap: true,// 生产环境是否生成 sourceMap 文件
     css: {
@@ -26,29 +39,23 @@ module.exports = {
         loaderOptions: {},// css预设器配置项
         requireModuleExtension: false// 启用 CSS modules for all css / pre-processor files.
     },
-    configureWebpack: config => { //webpack 配置项
-        if (process.env.NODE_ENV === 'production') {
-            // 为生产环境修改配置...
-        } else {
-            // 为开发环境修改配置...
-        }
-    },
+
     devServer: { //环境配置
         host: 'localhost',
         port: 8080,
         https: false,
         hotOnly: false,
         open: true, //配置自动启动浏览器
-        // proxy: {// 配置多个代理(配置一个 proxy: 'http://localhost:4000' ) 
-        //     '/api': {
-        //         target: '<url>',
-        //         ws: true,
-        //         changeOrigin: true
-        //     },
-        //     '/foo': {
-        //         target: '<other_url>'
-        //     }
-        // }
+        proxy: {// 配置多个代理(配置一个 proxy: 'http://localhost:4000' ) 
+            '/api': {
+                target: 'https://ce-sit.evergrandelife.com.cn/',
+                ws: true,
+                changeOrigin: true,
+                pathRewrite:{
+                    "^/api":''
+                }
+            },
+        }
         // pluginOptions: {// 第三方插件配置
         //     // ...
         // }
