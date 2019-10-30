@@ -5,7 +5,8 @@ module.exports = {
     assetsDir: '', //放置生成的静态资源包
     indexPath: 'index.html', // 生成的index.html 路径
     filenameHashing: "true", //静态资源的页面缓存
-    transpileDependencies:['vux'],
+    lintOnSave:true,//是否在每次保存时使用eslint检查
+    transpileDependencies:['vux'], //导入vux 
     pages: {
         index: {
             entry: 'src/main.js', //page 入口

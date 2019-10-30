@@ -54,7 +54,10 @@
     ],
     "rules": {
       "no-console": "off",
-      "no-div-regex": 0
+      "no-div-regex": "off",
+      "no-control-regex":"off",
+      "no-irregular-whitespace":"off",
+      "no-regex-spaces":"off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
