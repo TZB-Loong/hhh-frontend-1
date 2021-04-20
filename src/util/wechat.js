@@ -9,14 +9,7 @@ const Wechat = {
     }
     return result[1];
   },
-  defaultShare: {
-    title: "恒享汇分享",
-    imgUrl: "https://ce.evergrandelife.com.cn/static/images/product/a.png",
-    desc: "恒享汇分享描述",
-    link: "https://ce.evergrandelife.com.cn/index.html"
-  },
-  assetsRoot: "https://ce.evergrandelife.com.cn/index.html",
-  imgRoot: "https://ce.evergrandelife.com.cn",
+
 
   shareInfo: {},
 
